@@ -25,7 +25,7 @@
             {{each_result.title.substring(0, 9)}}
           </div>
           <div class="complete">
-            {{each_result.title.substring(0, 30)}}
+            {{each_result.title.substring(0, 60)}}
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
     },
           handleCurrentChange	(page){
             console.log(page)
-            this.start = page * this.limit
+            this.start = (page-1) * this.limit
             axios.get("/api/search", {
               params: {
                 start: this.start,
