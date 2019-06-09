@@ -1,23 +1,18 @@
 <template>
     <div>
-      <!--<swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">-->
-        <!--&lt;!&ndash; slides &ndash;&gt;-->
-        <!--<swiper-slide>-->
-          <!--<img src="@/assets/22.jpeg" width="100%"/>-->
-        <!--</swiper-slide>-->
-        <!--<swiper-slide>-->
-          <!--<img src="@/assets/222.jpeg" width="100%" /></swiper-slide>-->
-        <!--<swiper-slide>-->
-          <!--<img src="@/assets/logo.png"/>-->
-        <!--</swiper-slide>-->
+      
+      <div class = "cardWrapper">
+        <el-carousel :interval="4000" type="card" height="200px" >
+          <el-carousel-item v-for="item in itemList" :key="item.id">
+            <img :src="item.url" alt="" width="400px" height="200px">
+          </el-carousel-item>
+        </el-carousel>
 
-        <!--&lt;!&ndash; Optional controls &ndash;&gt;-->
-        <!--<div class="swiper-pagination"  slot="pagination"></div>-->
-      <!--</swiper>-->
+      </div>
 
       <div class = "search_input_btn">
         <el-input v-model="input" placeholder="请输入内容" class="search_input"></el-input>
-        <el-button @click="handleBtnClick" size="medium" type="primary" class="search_btn">搜索</el-button>
+        <el-button @click="handleBtnClick" size="medium" type="primary" class="search_btn" icon="el-icon-search">搜索</el-button>
       </div>
       <div class="wrapper">
         <div class="content" v-for="each_result of resultList" :key="each_result.id" @click="handleContentClick(each_result.url)">
@@ -57,14 +52,13 @@
               limit: 5,
               resultList: [],
               totalNumber: 0,
-              pageSize: 5
-//              swiperOption: {
-//                // some swiper options/callbacks
-//                // 所有的参数同 swiper 官方 api 参数
-//                // ...
-//                pagination: '.swiper-pagination',
-//                loop: true
-//              }
+              pageSize: 5,
+              itemList: [
+                {id: 1, url: require("@/assets/22.jpeg")},
+                {id: 2, url: require("@/assets/222.jpeg")},
+                {id: 3, url: require("@/assets/juzi.jpg")},
+                {id: 4, url: require("@/assets/x.jpg")}
+              ]
             }
         },
         methods: {
@@ -109,8 +103,24 @@
 </script>
 
 <style scoped>
+
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+
+  .cardWrapper {
+    width: 800px;
+    height: 200px;
+    margin: 0 auto;
+ }
+
   .wrapper{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 600px;
     margin: 5px auto;
   }
@@ -140,8 +150,8 @@
   .search_input_btn{
 
     width: 650px;
-    height: 130px;
-    /*border: 1px solid red;*/
+    height: 110px;
+    /* border: 1px solid red; */
     margin: 0px auto;
     margin-top: 100px;
   }
@@ -149,7 +159,7 @@
     float: left;
     width: 120px;
     height: 40px;
-    /*border: 1px solid black;*/
+    /* border: 1px solid black; */
   }
   .search_input {
     float: left;
